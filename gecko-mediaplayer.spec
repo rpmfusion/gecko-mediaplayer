@@ -1,6 +1,6 @@
 Name:           gecko-mediaplayer
 Version:        0.6.3
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Gnome MPlayer browser plugin
 
 Group:          Applications/Multimedia
@@ -95,6 +95,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Wed Jul 30 2008 Thorsten Leemhuis <fedora [AT] leemhuis [DOT] info - 0.6.3-3
+- rebuild for buildsys cflags issue
+
 * Wed Jul 30 2008 Thorsten Leemhuis <fedora [AT] leemhuis [DOT] info - 0.6.3-2
 - rebuild for buildsys cflags issue
 
