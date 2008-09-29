@@ -1,5 +1,5 @@
 Name:           gecko-mediaplayer
-Version:        0.7.0
+Version:        0.8.0
 Release:        1.1%{?dist}
 Summary:        Gnome MPlayer browser plugin
 
@@ -95,6 +95,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Mon Sep 29 2008 Julian Sikorski <belegdol[at]gmail[dot]com> - 0.8.0-1.1
+- Updated to 0.8.0
+
 * Sun Aug 17 2008 Julian Sikorski <belegdol[at]gmail[dot]com> - 0.7.0-1.1
 - Updated to 0.7.0
 
