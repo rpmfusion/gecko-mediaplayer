@@ -1,6 +1,6 @@
 Name:           gecko-mediaplayer
 Version:        0.9.2
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Gnome MPlayer browser plugin
 
 Group:          Applications/Multimedia
@@ -16,7 +16,7 @@ BuildRequires:  libX11-devel
 BuildRequires:  gecko-devel
 
 Requires:       %{_libdir}/mozilla/plugins
-Requires:       gnome-mplayer-core-functionality >= %{version}
+Requires:       gnome-mplayer-binary >= %{version}
 
 Requires(pre):  GConf2
 Requires(post): GConf2
@@ -95,6 +95,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Mon Nov 24 2008 Julian Sikorski <belegdol[at]gmail[dot]com> - 0.9.2-2
+- s/gnome-mplayer-core-functionality/gnome-mplayer-binary
+
 * Sat Nov 22 2008 Julian Sikorski <belegdol[at]gmail[dot]com> - 0.9.2-1
 - Updated to 0.9.2
 - Require gnome-mplayer-core-functionality instead of gnome-mplayer
