@@ -83,20 +83,15 @@ rm -rf $RPM_BUILD_ROOT
 %doc COPYING ChangeLog
 %{_sysconfdir}/gconf/schemas/gecko-mediaplayer.schemas
 %{_libdir}/mozilla/plugins/gecko-mediaplayer-dvx.so
-%{_libdir}/mozilla/plugins/gecko-mediaplayer-dvx.xpt
 %{_libdir}/mozilla/plugins/gecko-mediaplayer-qt.so
-%{_libdir}/mozilla/plugins/gecko-mediaplayer-qt.xpt
 %{_libdir}/mozilla/plugins/gecko-mediaplayer-rm.so
-%{_libdir}/mozilla/plugins/gecko-mediaplayer-rm.xpt
 %{_libdir}/mozilla/plugins/gecko-mediaplayer-wmp.so
-%{_libdir}/mozilla/plugins/gecko-mediaplayer-wmp.xpt
 %{_libdir}/mozilla/plugins/gecko-mediaplayer.so
-%{_libdir}/mozilla/plugins/gecko-mediaplayer.xpt
 
 
 %changelog
 * Wed Feb  4 2009 Julian Sikorski <belegdol[at]gmail[dot]com> - 0.9.4-1
-- Updated to 0.9.4
+- Updated to 0.9.4, no more xpt files
 - Dropped the upsteamed patch
 - Updated the URL
 
