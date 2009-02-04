@@ -5,9 +5,8 @@ Summary:        Gnome MPlayer browser plugin
 
 Group:          Applications/Multimedia
 License:        GPLv2+
-URL:            http://code.google.com/p/gecko-mediaplayer/
+URL:            http://kdekorte.googlepages.com/gecko-mediaplayer
 Source0:        http://gecko-mediaplayer.googlecode.com/files/%{name}-%{version}.tar.gz
-Patch0:         gecko-mediaplayer-0.9.3-console.patch
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires:  dbus-glib-devel
@@ -33,7 +32,6 @@ Solaris) and use the NS4 API (Mozilla, Firefox, Opera, etc.).
 
 %prep
 %setup -q
-%patch0 -p0 -b .console
 
 
 %build
@@ -97,6 +95,11 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Wed Feb  4 2009 Julian Sikorski <belegdol[at]gmail[dot]com> - 0.9.4-1
+- Updated to 0.9.4
+- Dropped the upsteamed patch
+- Updated the URL
+
 * Thu Jan  8 2009 Julian Sikorski <belegdol[at]gmail[dot]com> - 0.9.3-2
 - Added patch fixing rpmfusion bug #290 from SVN
 
