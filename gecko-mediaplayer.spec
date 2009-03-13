@@ -1,5 +1,5 @@
 Name:           gecko-mediaplayer
-Version:        0.9.4
+Version:        0.9.5
 Release:        1%{?dist}
 Summary:        Gnome MPlayer browser plugin
 
@@ -90,6 +90,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Fri Mar 13 2009 Julian Sikorski <belegdol[at]gmail[dot]com> - 0.9.5-1
+- Updated to 0.9.5
+
 * Wed Feb  4 2009 Julian Sikorski <belegdol[at]gmail[dot]com> - 0.9.4-1
 - Updated to 0.9.4, no more xpt files
 - Dropped the upsteamed patch
