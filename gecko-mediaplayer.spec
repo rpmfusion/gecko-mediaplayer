@@ -1,5 +1,5 @@
 Name:           gecko-mediaplayer
-Version:        0.9.5
+Version:        0.9.6
 Release:        1%{?dist}
 Summary:        Gnome MPlayer browser plugin
 
@@ -90,6 +90,12 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Sun Jun 05 2009 Julian Sikorski <belegdol[at]gmail[dot]com> - 0.9.6-1
+- Updated to 0.9.6
+
+* Sun Mar 29 2009 Thorsten Leemhuis <fedora [AT] leemhuis [DOT] info> - 0.9.5-2
+- rebuild for new F11 features
+
 * Fri Mar 13 2009 Julian Sikorski <belegdol[at]gmail[dot]com> - 0.9.5-1
 - Updated to 0.9.5
 
