@@ -7,6 +7,7 @@ Group:          Applications/Multimedia
 License:        GPLv2+
 URL:            http://kdekorte.googlepages.com/gecko-mediaplayer
 Source0:        http://gecko-mediaplayer.googlecode.com/files/%{name}-%{version}.tar.gz
+Patch0:         gecko-mediaplayer-1.0.0-libxul2.patch
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires:  dbus-glib-devel
@@ -32,6 +33,7 @@ Solaris) and use the NS4 API (Mozilla, Firefox, Opera, etc.).
 
 %prep
 %setup -q
+%patch0 -p1 -b .libxul2
 
 
 %build
@@ -92,6 +94,7 @@ rm -rf $RPM_BUILD_ROOT
 %changelog
 * Sat Nov 06 2010 Julian Sikorski <belegdol@fedoraproject.org> - 1.0.0-1
 - Updated to 1.0.0
+- Fixed xulrunner 2 detection
 
 * Thu Feb 25 2010 Julian Sikorski <belegdol[at]gmail[dot]com> - 0.9.9.2-1
 - Updated to 0.9.9.2
