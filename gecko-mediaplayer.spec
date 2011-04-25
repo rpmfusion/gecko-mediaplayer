@@ -7,7 +7,6 @@ Group:          Applications/Multimedia
 License:        GPLv2+
 URL:            http://kdekorte.googlepages.com/gecko-mediaplayer
 Source0:        http://gecko-mediaplayer.googlecode.com/files/%{name}-%{version}.tar.gz
-Patch0:         gecko-mediaplayer-1.0.0-libxul2.patch
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires:  dbus-glib-devel
