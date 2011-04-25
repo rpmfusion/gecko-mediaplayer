@@ -1,5 +1,5 @@
 Name:           gecko-mediaplayer
-Version:        1.0.0
+Version:        1.0.3
 Release:        1%{?dist}
 Summary:        Gnome MPlayer browser plugin
 
@@ -11,7 +11,9 @@ Patch0:         gecko-mediaplayer-1.0.0-libxul2.patch
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires:  dbus-glib-devel
+%if 0%{?fedora} < 15
 BuildRequires:  GConf2-devel
+%endif
 BuildRequires:  gettext
 BuildRequires:  libX11-devel
 BuildRequires:  gecko-devel
@@ -19,9 +21,11 @@ BuildRequires:  gecko-devel
 Requires:       mozilla-filesystem
 Requires:       gnome-mplayer-binary >= %{version}
 
+%if 0%{?fedora} < 15
 Requires(pre):  GConf2
 Requires(post): GConf2
 Requires(preun): GConf2
+%endif
 
 Obsoletes:      mplayerplug-in < 3.50
 
@@ -33,11 +37,14 @@ Solaris) and use the NS4 API (Mozilla, Firefox, Opera, etc.).
 
 %prep
 %setup -q
-%patch0 -p1 -b .libxul2
 
 
 %build
+%if 0%{?fedora} == 14
+%configure --with-gconf
+%else
 %configure
+%endif
 make %{?_smp_mflags}
 
 
@@ -52,28 +59,21 @@ rm -rf $RPM_BUILD_ROOT%{_docdir}/gecko-mediaplayer
 
 
 %pre
-if [ "$1" -gt 1 ]; then
-    export GCONF_CONFIG_SOURCE=`gconftool-2 --get-default-source`
-    gconftool-2 --makefile-uninstall-rule \
-      %{_sysconfdir}/gconf/schemas/gecko-mediaplayer.schemas >/dev/null || :
-    # If the schema file has ever been renamed::
-    #gconftool-2 --makefile-uninstall-rule \
-    #  %{_sysconfdir}/gconf/schemas/[OLDNAME].schemas > /dev/null || :
-fi
+%if 0%{?fedora} < 15
+%gconf_schema_prepare gecko-mediaplayer
+%endif
 
 
 %post
-export GCONF_CONFIG_SOURCE=`gconftool-2 --get-default-source`
-gconftool-2 --makefile-install-rule \
-  %{_sysconfdir}/gconf/schemas/gecko-mediaplayer.schemas > /dev/null || :
+%if 0%{?fedora} < 15
+%gconf_schema_upgrade gecko-mediaplayer
+%endif
 
 
 %preun
-if [ "$1" -eq 0 ]; then
-    export GCONF_CONFIG_SOURCE=`gconftool-2 --get-default-source`
-    gconftool-2 --makefile-uninstall-rule \
-      %{_sysconfdir}/gconf/schemas/gecko-mediaplayer.schemas > /dev/null || :
-fi
+%if 0%{?fedora} < 15
+%gconf_schema_remove gecko-mediaplayer
+%endif
 
 
 %clean
@@ -83,7 +83,9 @@ rm -rf $RPM_BUILD_ROOT
 %files -f %{name}.lang
 %defattr(-,root,root,-)
 %doc COPYING ChangeLog
+%if 0%{?fedora} < 15
 %{_sysconfdir}/gconf/schemas/gecko-mediaplayer.schemas
+%endif
 %{_libdir}/mozilla/plugins/gecko-mediaplayer-dvx.so
 %{_libdir}/mozilla/plugins/gecko-mediaplayer-qt.so
 %{_libdir}/mozilla/plugins/gecko-mediaplayer-rm.so
@@ -92,6 +94,11 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Mon Apr 25 2011 Julian Sikorski <belegdol@fedoraproject.org> - 1.0.3-1
+- Dropped included patches
+- Added logic to support gsettings/GConf
+- Updated GConf scriptlets to the latest spec
+
 * Sat Nov 06 2010 Julian Sikorski <belegdol@fedoraproject.org> - 1.0.0-1
 - Updated to 1.0.0
 - Fixed xulrunner 2 detection
