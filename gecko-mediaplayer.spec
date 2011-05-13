@@ -1,6 +1,6 @@
 Name:           gecko-mediaplayer
 Version:        1.0.3
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Gnome MPlayer browser plugin
 
 Group:          Applications/Multimedia
@@ -13,7 +13,8 @@ BuildRequires:  dbus-glib-devel
 %if 0%{?fedora} < 15
 BuildRequires:  GConf2-devel
 %endif
-BuildRequires:  gettext
+BuildRequires:  gettexit
+BuildRequires:  libcurl-devel
 BuildRequires:  libX11-devel
 BuildRequires:  gecko-devel
 
@@ -93,6 +94,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Fri May 13 2011 Julian Sikorski <belegdol@fedoraproject.org> - 1.0.3-2
+- Added explicit libcurl-devel to BuildRequires
+
 * Mon Apr 25 2011 Julian Sikorski <belegdol@fedoraproject.org> - 1.0.3-1
 - Dropped included patches
 - Added logic to support gsettings/GConf
