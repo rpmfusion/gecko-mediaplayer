@@ -13,7 +13,7 @@ BuildRequires:  dbus-glib-devel
 %if 0%{?fedora} < 15
 BuildRequires:  GConf2-devel
 %endif
-BuildRequires:  gettexit
+BuildRequires:  gettext
 BuildRequires:  libcurl-devel
 BuildRequires:  libX11-devel
 BuildRequires:  gecko-devel
