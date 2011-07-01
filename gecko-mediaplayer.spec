@@ -1,6 +1,6 @@
 Name:           gecko-mediaplayer
-Version:        1.0.3
-Release:        2%{?dist}
+Version:        1.0.4
+Release:        1%{?dist}
 Summary:        Gnome MPlayer browser plugin
 
 Group:          Applications/Multimedia
@@ -50,7 +50,9 @@ make %{?_smp_mflags}
 
 %install
 rm -rf $RPM_BUILD_ROOT
+%if 0%{?fedora} < 15
 export GCONF_DISABLE_MAKEFILE_SCHEMA_INSTALL=1
+%endif
 make install DESTDIR=$RPM_BUILD_ROOT
 %find_lang %{name}
 
@@ -94,6 +96,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Fri Jul 01 2011 Julian Sikorski <belegdol@fedoraproject.org> - 1.0.4-1
+- Updated to 1.0.4
+
 * Fri May 13 2011 Julian Sikorski <belegdol@fedoraproject.org> - 1.0.3-2
 - Added explicit libcurl-devel to BuildRequires
 
