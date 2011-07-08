@@ -1,6 +1,6 @@
 Name:           gecko-mediaplayer
 Version:        1.0.4
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Gnome MPlayer browser plugin
 
 Group:          Applications/Multimedia
@@ -98,6 +98,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Fri Jul 08 2011 Julian Sikorski <belegdol@fedoraproject.org> - 1.0.4-3
+- Updated the apple.com fix
+
 * Thu Jul 07 2011 Julian Sikorski <belegdol@fedoraproject.org> - 1.0.4-2
 - Fixed apple.com regression using a patch from SVN
 
