@@ -1,6 +1,12 @@
+%if 0%{?fedora} < 15
+%bcond_without gconf
+%else
+%bcond_with gconf
+%endif
+
 Name:           gecko-mediaplayer
 Version:        1.0.4
-Release:        3%{?dist}
+Release:        4%{?dist}
 Summary:        Gnome MPlayer browser plugin
 
 Group:          Applications/Multimedia
@@ -11,7 +17,7 @@ Patch0:         %{name}-applefix.patch
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires:  dbus-glib-devel
-%if 0%{?fedora} < 15
+%if %{with gconf}
 BuildRequires:  GConf2-devel
 %endif
 BuildRequires:  gettext
@@ -22,7 +28,7 @@ BuildRequires:  gecko-devel
 Requires:       mozilla-filesystem
 Requires:       gnome-mplayer-binary >= %{version}
 
-%if 0%{?fedora} < 15
+%if %{with gconf}
 Requires(pre):  GConf2
 Requires(post): GConf2
 Requires(preun): GConf2
@@ -42,17 +48,13 @@ Solaris) and use the NS4 API (Mozilla, Firefox, Opera, etc.).
 
 
 %build
-%if 0%{?fedora} == 14
-%configure --with-gconf
-%else
-%configure
-%endif
+%configure %{?with_gconf:--with-gconf}
 make %{?_smp_mflags}
 
 
 %install
 rm -rf $RPM_BUILD_ROOT
-%if 0%{?fedora} < 15
+%if %{with gconf}
 export GCONF_DISABLE_MAKEFILE_SCHEMA_INSTALL=1
 %endif
 make install DESTDIR=$RPM_BUILD_ROOT
@@ -62,20 +64,20 @@ make install DESTDIR=$RPM_BUILD_ROOT
 rm -rf $RPM_BUILD_ROOT%{_docdir}/gecko-mediaplayer
 
 
+%if %{with gconf}
 %pre
-%if 0%{?fedora} < 15
 %gconf_schema_prepare gecko-mediaplayer
 %endif
 
 
+%if %{with gconf}
 %post
-%if 0%{?fedora} < 15
 %gconf_schema_upgrade gecko-mediaplayer
 %endif
 
 
+%if %{with gconf}
 %preun
-%if 0%{?fedora} < 15
 %gconf_schema_remove gecko-mediaplayer
 %endif
 
@@ -87,7 +89,7 @@ rm -rf $RPM_BUILD_ROOT
 %files -f %{name}.lang
 %defattr(-,root,root,-)
 %doc COPYING ChangeLog
-%if 0%{?fedora} < 15
+%if %{with gconf}
 %{_sysconfdir}/gconf/schemas/gecko-mediaplayer.schemas
 %endif
 %{_libdir}/mozilla/plugins/gecko-mediaplayer-dvx.so
@@ -98,6 +100,10 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Sat Jul 16 2011 Julian Sikorski <belegdol@fedoraproject.org> - 1.0.4-4
+- Added an easy way to pick between GSettings and GConf2
+- Rearranged the conditionals to avoid leaving empty %%pre et al.
+
 * Fri Jul 08 2011 Julian Sikorski <belegdol@fedoraproject.org> - 1.0.4-3
 - Updated the apple.com fix
 
