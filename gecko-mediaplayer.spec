@@ -1,38 +1,21 @@
-%if 0%{?fedora} < 15
-%bcond_without gconf
-%else
-%bcond_with gconf
-%endif
-
 Name:           gecko-mediaplayer
-Version:        1.0.4
-Release:        4%{?dist}
+Version:        1.0.5
+Release:        1%{?dist}
 Summary:        Gnome MPlayer browser plugin
 
-Group:          Applications/Multimedia
 License:        GPLv2+
 URL:            http://kdekorte.googlepages.com/gecko-mediaplayer
 Source0:        http://gecko-mediaplayer.googlecode.com/files/%{name}-%{version}.tar.gz
-Patch0:         %{name}-applefix.patch
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires:  dbus-glib-devel
-%if %{with gconf}
-BuildRequires:  GConf2-devel
-%endif
 BuildRequires:  gettext
+BuildRequires:  gmtk-devel == %{version}.0
 BuildRequires:  libcurl-devel
 BuildRequires:  libX11-devel
 BuildRequires:  gecko-devel
 
 Requires:       mozilla-filesystem
-Requires:       gnome-mplayer-binary >= %{version}
-
-%if %{with gconf}
-Requires(pre):  GConf2
-Requires(post): GConf2
-Requires(preun): GConf2
-%endif
+Requires:       gnome-mplayer-binary%{?_isa} >= %{version}
 
 Obsoletes:      mplayerplug-in < 3.50
 
@@ -44,19 +27,15 @@ Solaris) and use the NS4 API (Mozilla, Firefox, Opera, etc.).
 
 %prep
 %setup -q
-%patch0 -p0 -b .applefix
 
 
 %build
-%configure %{?with_gconf:--with-gconf}
+%configure
 make %{?_smp_mflags}
 
 
 %install
 rm -rf $RPM_BUILD_ROOT
-%if %{with gconf}
-export GCONF_DISABLE_MAKEFILE_SCHEMA_INSTALL=1
-%endif
 make install DESTDIR=$RPM_BUILD_ROOT
 %find_lang %{name}
 
@@ -64,34 +43,8 @@ make install DESTDIR=$RPM_BUILD_ROOT
 rm -rf $RPM_BUILD_ROOT%{_docdir}/gecko-mediaplayer
 
 
-%if %{with gconf}
-%pre
-%gconf_schema_prepare gecko-mediaplayer
-%endif
-
-
-%if %{with gconf}
-%post
-%gconf_schema_upgrade gecko-mediaplayer
-%endif
-
-
-%if %{with gconf}
-%preun
-%gconf_schema_remove gecko-mediaplayer
-%endif
-
-
-%clean
-rm -rf $RPM_BUILD_ROOT
-
-
 %files -f %{name}.lang
-%defattr(-,root,root,-)
 %doc COPYING ChangeLog
-%if %{with gconf}
-%{_sysconfdir}/gconf/schemas/gecko-mediaplayer.schemas
-%endif
 %{_libdir}/mozilla/plugins/gecko-mediaplayer-dvx.so
 %{_libdir}/mozilla/plugins/gecko-mediaplayer-qt.so
 %{_libdir}/mozilla/plugins/gecko-mediaplayer-rm.so
@@ -100,6 +53,14 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Thu Dec 29 2011 Julian Sikorski <belegdol@fedoraproject.org> - 1.0.5-1
+- Updated to 1.0.5
+- Dropped the included apple.com fix
+- Refactored to accomodate the gmtk split
+- Dropped obsolete Group, Buildroot, %%clean and %%defattr
+- Removed GConf logic since F-14 is EOL
+- Added %%{?_isa} to explicit dependencies
+
 * Sat Jul 16 2011 Julian Sikorski <belegdol@fedoraproject.org> - 1.0.4-4
 - Added an easy way to pick between GSettings and GConf2
 - Rearranged the conditionals to avoid leaving empty %%pre et al.
