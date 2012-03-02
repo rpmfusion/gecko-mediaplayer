@@ -1,6 +1,6 @@
 Name:           gecko-mediaplayer
 Version:        1.0.5
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Gnome MPlayer browser plugin
 
 License:        GPLv2+
@@ -53,6 +53,9 @@ rm -rf $RPM_BUILD_ROOT%{_docdir}/gecko-mediaplayer
 
 
 %changelog
+* Fri Mar 02 2012 Nicolas Chauvet <kwizart@gmail.com> - 1.0.5-2
+- Rebuilt for c++ ABI breakage
+
 * Thu Dec 29 2011 Julian Sikorski <belegdol@fedoraproject.org> - 1.0.5-1
 - Updated to 1.0.5
 - Dropped the included apple.com fix
