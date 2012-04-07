@@ -1,6 +1,6 @@
 Name:           gecko-mediaplayer
 Version:        1.0.6
-Release:        %{?dist}
+Release:        1%{?dist}
 Summary:        Gnome MPlayer browser plugin
 
 License:        GPLv2+
