@@ -1,6 +1,6 @@
 Name:           gecko-mediaplayer
 Version:        1.0.9
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Gnome MPlayer browser plugin
 
 License:        GPLv2+
@@ -53,6 +53,9 @@ rm -rf $RPM_BUILD_ROOT%{_docdir}/gecko-mediaplayer
 
 
 %changelog
+* Mon Sep 01 2014 Sérgio Basto <sergio@serjux.com> - 1.0.9-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_21_22_Mass_Rebuild
+
 * Thu Apr 24 2014 Julian Sikorski <belegdol@fedoraproject.org> - 1.0.9-1
 - Updated to 1.0.9
 
