@@ -1,11 +1,12 @@
 Name:           gecko-mediaplayer
 Version:        1.0.9
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Gnome MPlayer browser plugin
 
 License:        GPLv2+
 URL:            http://kdekorte.googlepages.com/gecko-mediaplayer
 Source0:        http://gecko-mediaplayer.googlecode.com/files/%{name}-%{version}.tar.gz
+Patch0:         np_loadds.patch
 
 BuildRequires:  dbus-glib-devel
 BuildRequires:  gettext
@@ -27,6 +28,7 @@ Solaris) and use the NS4 API (Mozilla, Firefox, Opera, etc.).
 
 %prep
 %setup -q
+%patch0 -p1 -b .np_loadds
 
 
 %build
@@ -53,6 +55,9 @@ rm -rf $RPM_BUILD_ROOT%{_docdir}/gecko-mediaplayer
 
 
 %changelog
+* Sat Sep 06 2014 Julian Sikorski <belegdol@fedoraproject.org> - 1.0.9-3
+- Fixed build failure using a patch from Debian
+
 * Mon Sep 01 2014 Sérgio Basto <sergio@serjux.com> - 1.0.9-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_21_22_Mass_Rebuild
 
